@@ -1,0 +1,120 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0px;
+            font-family: 'Roboto';
+            text-align: center;
+        }
+
+        #container {
+            color: #999;
+            text-transform: uppercase;
+            font-size: 36px;
+            font-weight: bold;
+            padding-top: 200px;
+            position: fixed;
+            width: 100%;
+            bottom: 45%;
+            display: block;
+        }
+
+        #flip {
+            height: 50px;
+            overflow: hidden;
+        }
+
+        #flip>div>div {
+            color: #000;
+            padding: 4px 12px;
+            height: 90px;
+            display: inline-block;
+        }
+
+        #flip div:first-child {
+            animation: show 15s linear infinite;
+        }
+
+        @keyframes show {
+            12.5% {
+                margin-top: 0px;
+            }
+
+            25% {
+                margin-top: -90px;
+            }
+
+            37.5% {
+                margin-top: -180px;
+            }
+
+            50% {
+                margin-top: -270px;
+            }
+
+            62.5% {
+                margin-top: -360px;
+            }
+
+            75% {
+                margin-top: -450px;
+            }
+
+            87.5% {
+                margin-top: -540px;
+            }
+
+            100% {
+                margin-top: -630px;
+            }
+        }
+
+        p {
+            position: fixed;
+            width: 100%;
+            bottom: 30px;
+            font-size: 12px;
+            color: #999;
+            margin-top: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id=container>
+        Grow your
+        <div id=flip>
+           
+                <div>Visibility</div>
+          
+          
+                <div>Business</div>
+           
+           
+                <div>Future</div>
+          
+          
+                <div>Competitive Advantage</div>
+            
+          
+                <div>Customer Base</div>
+            
+           
+                <div>Noticeability</div>
+            
+            
+                <div>Boldness</div>
+            
+        </div>
+        with us
+    </div>
+
+    <p>a css3 animation demo</p>
+</body>
+
+</html>

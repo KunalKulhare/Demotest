@@ -1,0 +1,174 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <style>
+        .shadowed {
+            -moz-box-shadow: 0px 0px 5px #444444;
+            -webkit-box-shadow: 0px 0px 5px #444444;
+            box-shadow: 0px 0px 5px #444444;
+        }
+
+        .video-container-wrapper {
+            width: 100%;
+            height: 100%;
+            background: rgba(37, 37, 37, .7);
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            display: none;
+            opacity: 0;
+        }
+
+        .video-container-wrapper:before {
+            content: ' ';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .sizewrapper {
+            width: 50%;
+            /* Would normally be 1920px, limited because codepen's screen is small */
+            max-width: 920px;
+            vertical-align: middle;
+            position: relative;
+            background: rgba(255, 255, 255, 0);
+            z-index: 51;
+            display: none;
+        }
+
+        #videowrapper {
+            position: relative;
+            padding-top: 25px;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+        }
+
+        #videowrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .close {
+            position: absolute;
+            right: -42px;
+            top: 0;
+            color: #fff;
+            cursor: pointer;
+            font-size: 24px;
+            line-height: 32px;
+            text-align: center;
+            background-color: orange;
+            width: 32px;
+            height: 32px;
+        }
+
+        .go-to-yt {
+            padding: 16px;
+            margin: 8px 0 0;
+          
+            text-align: right;
+            background-color: #fff;
+            display: inline-block;
+        }
+
+        .go-to-yt a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Click the thumbnail to watch the video:</h1>
+
+    <a href="https://www.youtube.com/watch?v=nYb4FUdlLZE" target="_blank" class="open-yt-lightbox">
+        <img src="https://img.youtube.com/vi/nYb4FUdlLZE/0.jpg" />
+    </a>
+    <a href="https://www.youtube.com/watch?v=0zJCMNluW4c" target="_blank" class="open-yt-lightbox">
+        <img src="https://img.youtube.com/vi/0zJCMNluW4c/0.jpg" />
+    </a>
+
+    <div class="video-container-wrapper lightbox-backdrop">
+
+        <div class="sizewrapper box">
+
+            <div class="close shadowed">X</div>
+            <div id="videowrapper" class="shadowed">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/nYb4FUdlLZE?enablejsapi=1"
+                    frameborder="0" id="yt-iframe" allowfullscreen></iframe>
+            </div>
+            
+          
+        </div>
+    </div>
+    <div class="video-container-wrapper lightbox-backdrop">
+
+        <div class="sizewrapper box">
+
+            <div class="close shadowed">X</div>
+            <div id="videowrapper" class="shadowed">
+                <iframe width="560" height="315" id="yt-iframe" src="https://www.youtube.com/embed/0zJCMNluW4c?enablejsapi=2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          
+        </div>
+
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            if ($('iframe').length >= 1) {
+                var tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/player_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                $('.open-yt-lightbox').click(function (event) {
+                    event.preventDefault();
+                    openbox();
+                });
+                $('.close').click(function () {
+                    closebox();
+                });
+                $('.lightbox-backdrop').click(function () {
+                    closebox();
+                });
+            }
+            var player;
+        });
+        function onYouTubePlayerAPIReady() {
+            player = new YT.Player('yt-iframe');
+        }
+
+        function openbox() {
+            $('.lightbox-backdrop, .box').css('display', 'inline-block');
+            $('.lightbox-backdrop, .box').animate({ 'opacity': '1' }, 300, 'linear');
+            player.playVideo();
+        }
+
+        function closebox() {
+            $('.lightbox-backdrop, .box').animate({ 'opacity': '0' }, 300, 'linear', function () {
+                $('.lightbox-backdrop, .box').css('display', 'none');
+                player.pauseVideo();
+            });
+        }
+    </script>
+
+
+</body>
+
+</html>

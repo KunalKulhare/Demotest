@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery Lightbox</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/uikit.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/css/components/slidenav.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.4/js/components/lightbox.js"></script>
+
+  <style>
+    .yt-link,
+    .yt-link:hover,
+    .yt-link:focus {
+      text-decoration: none;
+    }
+
+    .yt-bg {
+      width: 300px;
+      height: 180px;
+      display: block;
+      background-size: contain;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .uk-icon-youtube-play {
+      font-size: 40px;
+      color: #322;
+    }
+
+    .uk-modal {
+      background: rgba(0, 0, 0, 0.95);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="uk-container uk-container-center">
+    <div class="uk-grid" data-uk-grid-margin>
+      <div class="uk-width-1-4">
+        <a class="yt-link" href="https://www.youtube.com/watch?v=YE7VzlLtp-4" data-uk-lightbox="{group:'my-group'}"></a>
+      </div>
+      <div class="uk-width-1-4">
+        <a class="yt-link" href="https://www.youtube.com/watch?v=P4T9duI5uNA" data-uk-lightbox="{group:'my-group'}"></a>
+      </div>
+      <div class="uk-width-1-4">
+        <a class="yt-link" href="https://www.youtube.com/watch?v=P4T9duI5uNA" data-uk-lightbox="{group:'my-group'}"></a>
+      </div>
+      <div class="uk-width-1-4">
+        <a class="yt-link" href="https://www.youtube.com/watch?v=YvR8LGOUpNA" data-uk-lightbox="{group:'my-group'}"></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(".yt-link").each(function () {
+      var url = $(this).attr("href")
+      var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      var match = url.match(regExp);
+      if (match && match[2].length == 11) {
+        var id = match[2];
+        var path = 'https://img.youtube.com/vi/' + id + '/maxresdefault.jpg';
+        $(this).addClass('yt-bg').css('background-image', 'url(' + path + ')');
+        $(this).append('<i class="uk-icon-youtube-play"></i>');
+      }
+    });
+  </script>
+</body>
+
+</html>
